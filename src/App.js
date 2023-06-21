@@ -14,6 +14,7 @@ class App extends React.Component {
     // When Firebase changes, update local state, which will update local UI
     this.state = {
       messages: [],
+      input: "",
     };
   }
 
@@ -33,24 +34,35 @@ class App extends React.Component {
   writeData = () => {
     const messageListRef = ref(database, DB_MESSAGES_KEY);
     const newMessageRef = push(messageListRef);
-    set(newMessageRef, "abc");
+    set(newMessageRef, {
+      message: this.state.input,
+      time: new Date().toLocaleString(),
+    });
+    this.setState({
+      input: "",
+    });
   };
 
   render() {
     // Convert messages in state to message JSX elements to render
     let messageListItems = this.state.messages.map((message) => (
-      <li key={message.key}>{message.val}</li>
+      <li key={message.key}>
+        {message.val.time} - {message.val.message}
+      </li>
     ));
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
           {/* TODO: Add input field and add text input as messages in Firebase */}
+          <input
+            type="text"
+            value={this.state.input}
+            placeholder="type message here"
+            onChange={(e) => this.setState({ input: e.target.value })}
+          />
           <button onClick={this.writeData}>Send</button>
-          <ol>{messageListItems}</ol>
+          <ul>{messageListItems}</ul>
         </header>
       </div>
     );
