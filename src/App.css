@@ -8,7 +8,7 @@
 }
 
 .App-header {
-  background-image: url(./Pictures/bluebg.png);
+  background-color: rgb(52, 46, 46);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
