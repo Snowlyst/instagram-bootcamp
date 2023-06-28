@@ -89,13 +89,14 @@ function App() {
         ) : (
           <button onClick={doSignOut}>Sign Out!</button>
         )}
+        <br />
+        <button>
+          <Link to={"/"}>Back to Homepage</Link>
+        </button>
+        <button>
+          <Link to={"/messages"}>Message Board</Link>
+        </button>
       </header>
-      <button>
-        <Link to={"/"}>Back to Homepage</Link>
-      </button>
-      <button>
-        <Link to={"/messages"}>Message Board</Link>
-      </button>
     </div>
   );
 }
